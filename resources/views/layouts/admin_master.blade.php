@@ -134,7 +134,7 @@ Products<!DOCTYPE html>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Shakil Ahmed, Ekram Asif & Safana Quyum Chowdhury</div>
+                            <!-- <div class="text-muted">Copyright &copy; Shakil Ahmed, Ekram Asif & Safana Quyum Chowdhury</div> -->
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -175,4 +175,22 @@ Products<!DOCTYPE html>
 
         @yield('script')
     </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Admin Panel')</title>
+    <!-- Include your CSS files here -->
+</head>
+<body>
+    <div id="app">
+        @yield('content')
+    </div>
+    <!-- Include your JS files here -->
+    @yield('scripts')
+</body>
 </html>

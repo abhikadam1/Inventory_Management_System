@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\New_ProductController;
 use Illuminate\Http\Request;
 
 /*
@@ -22,12 +23,17 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//new routes 
+
+// Route::get('/add-product', [New_ProductController::class, 'create'])->name('products.create');
+Route::post('/insert-product', [New_ProductController::class, 'store'])->name('products.store');
+
 //product
 Route::get('/add-product', function () {
-    return view('Admin.add_product');
+    return view('products.create');
 })->middleware(['auth'])->name('add.product');
 
-Route::post('/insert-product',[ProductController::class,'store'])->middleware(['auth']);
+// Route::post('/insert-product',[ProductController::class,'store'])->middleware(['auth']);
 
 Route::get('/all-product',[ProductController::class,'allProduct'])->middleware(['auth'])->name('all.product');
 

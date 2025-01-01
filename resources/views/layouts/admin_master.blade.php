@@ -6,6 +6,7 @@ Products<!DOCTYPE html>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>InventoryManagementSystem</title>        
 
         <link href="{{ asset('backend') }}/css/styles.css" rel="stylesheet" />
@@ -174,23 +175,18 @@ Products<!DOCTYPE html>
                 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js"></script>
 
         @yield('script')
+        @yield('scripts')
     </body>
 </html>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Panel')</title>
-    <!-- Include your CSS files here -->
 </head>
 <body>
-    <div id="app">
-        @yield('content')
-    </div>
-    <!-- Include your JS files here -->
-    @yield('scripts')
 </body>
-</html>
+</html> -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\New_Product;
+use Illuminate\Support\Facades\Validator;
 
 class New_ProductController extends Controller
 {
@@ -38,7 +39,15 @@ class New_ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        // $request->validate([
+        //     'code' => 'required|string|max:255',
+        //     'name' => 'required|string|max:255',
+        //     'category' => 'required|string|max:255',
+        //     'stock' => 'required|integer',
+        //     'unit_price' => 'required|numeric',
+        //     'sale_price' => 'required|numeric',
+        // ]);
+        $validator = Validator::make($request->all(), [
             'code' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'category' => 'required|string|max:255',
@@ -46,8 +55,12 @@ class New_ProductController extends Controller
             'unit_price' => 'required|numeric',
             'sale_price' => 'required|numeric',
         ]);
-       echo "<pre>"; print($request->code); die();
 
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+        // print ($request);
+        // die;
         $product = new New_Product();
         $product->code = $request->code;
         $product->name = $request->name;
@@ -56,6 +69,10 @@ class New_ProductController extends Controller
         $product->unit_price = $request->unit_price;
         $product->sale_price = $request->sale_price;
         $product->save();
+        // echo "<pre>"; print($request->code); die();
+
+        // Set flash message
+        // session()->flash('success', 'Product added successfully!');
 
         return response()->json(['success' => true]);
     }

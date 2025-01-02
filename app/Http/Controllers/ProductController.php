@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\New_Product;
 
 class ProductController extends Controller
 {
@@ -30,12 +31,13 @@ class ProductController extends Controller
     }
 
     public function allProduct(){
-    	$products = Product::all();
+    	$products = New_Product::all();
+        
     	return view('Admin.all_product',compact('products'));
     }
 
     public function availableProducts(){
-        $products = Product::where('stock','>','0')->get();
+        $products = New_Product::where('stock','>','0')->get();
         return view('Admin.available_products',compact('products'));
     }
 
@@ -47,7 +49,7 @@ class ProductController extends Controller
     }
 
     public function purchaseData($id){
-        $product = Product::find($id);
+        $product = New_Product::find($id);
         
         return view('Admin.purchase_products',compact('product'));
     }

@@ -20,9 +20,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- {{pr($products->toArray());}} --}}
                 	@foreach($products as $row)
                     <tr>
-                        <td>{{ $row->product_code }}</td>
+                        <td>{{ $row->code }}</td>
                         <td>{{ $row->name }}</td>
                         <td>{{ $row->category }}</td>
                         

@@ -59,15 +59,16 @@ class New_ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
+        // dd($request);
         // print ($request);
         // die;
         $product = new New_Product();
-        $product->code = $request->code;
+        $product->product_code = $request->code;
         $product->name = $request->name;
         $product->category = $request->category;
         $product->stock = $request->stock;
         $product->unit_price = $request->unit_price;
-        $product->sale_price = $request->sale_price;
+        $product->sales_unit_price = $request->sale_price;
         $product->save();
         // echo "<pre>"; print($request->code); die();
 

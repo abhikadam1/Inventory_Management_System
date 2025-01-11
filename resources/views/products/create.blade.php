@@ -131,7 +131,7 @@
                                         </div>
                                     </div> -->
                                 </div>
-                                <h6>{{ getMonth('03-04-2024') }}</h6>
+                                <!-- <h6>{{ getMonth('03-04-2024') }}</h6> -->
                                 <div class="form-group mt-4 mb-0">
                                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                                 </div>

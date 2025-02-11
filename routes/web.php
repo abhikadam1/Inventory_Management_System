@@ -6,7 +6,11 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\New_ProductController;
+use App\Jobs\SendTestMailJob;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Support\Facades\Mail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +23,61 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    // dd($request);
+
     return view('auth.login');
+});
+
+Route::get('/collection', function (Request $request) {
+    // dd($request);
+    $collection = collect([2, 5, 1, 2, 5, 696, 8, 85, 475, 696, 44, 66, 2, 636, 363, 696, 1, 1]);
+    // $collection = Illuminate\Support\Collection::make ([2,5,18,85,475,696,44,66,2,636,363]);
+    // $collection = new Illuminate\Support\Collection ([2,5,18,85,475,696,44,66,2,636,363]);
+    // $collect = $collection->chunk(3);
+    // dd($collect);
+
+    // $collection->dd();
+    // $collection->dump();
+//    return $collection->duplicates();
+//    return $collection->mode();
+//    return $collection->last();
+    $user = App\Models\User::all();
+    dd($user);
+    echo " Test ";
+});
+
+Route::get('/createQueueJob', function () {    
+    dispatch(new SendTestMailJob)->delay(now()->addSeconds(50));
+    return " mail send before";
+});
+
+Route::get('/createQueue', function () {    
+    // dispatch(function(){
+    //     echo " mail send  later  ";
+
+    // })->delay(now()->addSeconds(50));
+    // return " mail send before";
+    dispatch(new SendTestMailJob)->delay(now()->addSeconds(5));
+    return " mail send before";
+});
+Route::get('/sendMail', function () {
+    $data = ['name' => 'New Code'];
+    Mail::send([], [], function ($msg) {
+        $msg->to('mohamed.ahmed@code4code.com', 'Advanced Laravel Code')
+            ->subject('New Subject')
+            ->setBody('The Test Coder56456', 'text/plain'); // Set the body and type
+    });
+
+    return "Mail Sent";
+});
+//     })
+// });
+
+Route::get('/contracts', function (Factory $cache) {
+    // $cache->put('key', 'The Test Coder');
+    dd($cache->get('key'));
+
 });
 
 //new routes 

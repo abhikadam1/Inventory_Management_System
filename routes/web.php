@@ -29,6 +29,15 @@ Route::get('/', function (Request $request) {
     return view('auth.login');
 });
 
+class Service
+{
+    //
+}
+ 
+Route::get('/service', function (Service $service) {
+    dd(get_class($service));
+});
+
 Route::get('/collection', function (Request $request) {
     // dd($request);
     $collection = collect([2, 5, 1, 2, 5, 696, 8, 85, 475, 696, 44, 66, 2, 636, 363, 696, 1, 1]);

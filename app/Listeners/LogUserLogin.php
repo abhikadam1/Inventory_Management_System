@@ -27,7 +27,7 @@ class LogUserLogin
      */
     public function handle(UserLoggedIn $event)
     {
-        dd($event->user);
-        Log::info("User Logged In:  Event listener" . $event->user->email);
+        // dd($event->user);
+        Log::info("User Logged In:  Event listener " . $event->user->email);
     }
 }

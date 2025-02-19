@@ -10,6 +10,9 @@ use App\Jobs\SendTestMailJob;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Cache\Factory;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+use App\Events\UserLoggedIn;
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -22,6 +25,48 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/greeting/{locale}', function ($locale) {
+    $lang = App::getLocale();
+    $lang = App::currentLocale();
+    return 
+
+    dd($lang);
+    // if (! in_array($locale, ['en', 'es', 'fr'])) {
+    //     abort(400);
+    // }
+ 
+    App::setLocale($locale);
+ 
+    //
+});
+
+
+Route::get('/testEvent', function () {
+    $data = [
+        'name' => 'John Doe',
+        'message' => 'This is a test email using Mailtrap!'
+    ];
+    
+    $user = App\Models\User::find(1);
+    // dd($user);
+    event(new UserLoggedIn($user));
+        
+    return response()->json(['message' => 'User logged in']);
+    
+    
+});
+
+Route::get('/send-test-email', function () {
+    $data = [
+        'name' => 'John Doe',
+        'message' => 'This is a test email using Mailtrap!'
+    ];
+
+    Mail::to('test@example.com')->send(new TestMail($data));
+
+    return "Test email has been sent!";
+});
 
 Route::get('/', function (Request $request) {
     // dd($request);

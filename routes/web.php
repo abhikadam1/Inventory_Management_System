@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use App\Events\UserLoggedIn;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 
 
 /*
@@ -202,5 +204,14 @@ Route::get('/all-customers', [CustomerController::class, 'customersData'])->midd
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/export-users', function () {
+    return Excel::download(new UsersExport, 'users.xlsx');
+});
+
+Route::post('/import-users', function (Request $request) {
+    Excel::import(new UsersImport, $request->file('file'));
+    return back()->with('success', 'Users imported successfully!');
+});
 
 require __DIR__ . '/auth.php';

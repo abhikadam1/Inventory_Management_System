@@ -15,6 +15,7 @@ use App\Events\UserLoggedIn;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
+use App\Http\Controllers\ExcelController;
 
 
 /*
@@ -76,10 +77,6 @@ Route::get('/', function (Request $request) {
     return view('auth.login');
 });
 
-class Service
-{
-    //
-}
  
 Route::get('/service', function (Service $service) {
     dd(get_class($service));
@@ -214,4 +211,16 @@ Route::post('/import-users', function (Request $request) {
     return back()->with('success', 'Users imported successfully!');
 });
 
+// 24/03/2025
+Route::get('/export-orders', function () {
+    return Excel::download(new OrdersExport, 'orders.xlsx');
+});
+
+Route::get('/excel', function(){
+    // dd('excel');
+    return view('excel');
+});
+Route::get('/exportUsers', [ExcelController::class, 'export'])
+    ->name('export.users');
+Route::post('/importUsers', [ExcelController::class, 'import']);
 require __DIR__ . '/auth.php';

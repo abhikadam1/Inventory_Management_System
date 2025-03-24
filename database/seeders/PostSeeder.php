@@ -13,13 +13,15 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        // $faker = Faker::create();
 
-        for ($i = 0; $i < 50; $i++) {
-            Post::create([
-                'title' => $faker->sentence(6), // Generates a random title
-                'content' => $faker->paragraph(4) // Generates random content
-            ]);
-        }
+        // for ($i = 0; $i < 50; $i++) {
+        //     Post::create([
+        //         'title' => $faker->sentence(6), // Generates a random title
+        //         'content' => $faker->paragraph(4) // Generates random content
+        //     ]);
+        // }
+
+        Post::factory(10)->create();
     }
 }

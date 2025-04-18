@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use App\Http\Controllers\ExcelController;
+use Maatwebsite\Excel\Facades\Excel;
+// use Maatwebsite\Excel\Excel;
 
 
 /*
@@ -203,7 +205,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/export-users', function () {
-    return Excel::download(new UsersExport, 'users.xlsx');
+    return Excel::download(new UsersExport, 'users', \Maatwebsite\Excel\Excel::XLSX);
 });
 
 Route::post('/import-users', function (Request $request) {

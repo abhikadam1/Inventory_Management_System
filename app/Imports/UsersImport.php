@@ -7,8 +7,11 @@ use App\Models\Post;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Nette\Utils\Random;
-use Str;
+use Illuminate\Support\Str;
+
 use Illuminate\Support\Facades\Hash;
+
+
 
 class UsersImport implements ToModel, WithHeadingRow
 {
@@ -19,18 +22,20 @@ class UsersImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        // return new User([
-        //     'name' => $row[0].Str::random(5),
-        //     'email' => $row[1].Str::random(5).'@gmail.com',
-        //     // 'password' => bcrypt($row[2]), // Hash::make($row[2])
-        //     'password' => Hash::make($row[2].Str::random(8)),
-        // ]);
+        return new User([
+            'name' => $row['name'].Str::random(5),
+            'email' => $row['email'].Str::random(5),
+            // 'name' => $row[0].Str::random(5),
+            // 'email' => $row[1].Str::random(5).'@gmail.com',
+            // 'password' => bcrypt($row[2]), // Hash::make($row[2])
+            'password' => Hash::make(Str::random(8)),
+        ]);
 
-        // dd($row);
+        dd($row);
         
         return new Post(attributes: [
-            'title' => $row['title'],
-            'content' => $row['content'],
+            'name' => $row['name'],
+            'email' => $row['email'],
             // 'title' => $row[0],
             // 'content' => $row[1],
         ]);

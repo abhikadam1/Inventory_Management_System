@@ -12,7 +12,7 @@ class ExcelController extends Controller
     // 🔹 Export Data
     public function export() 
     {
-        return Excel::download(new UsersExport, 'users.xlsx');
+        return Excel::download(new UsersExport, 'users.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     // 🔹 Import Data
